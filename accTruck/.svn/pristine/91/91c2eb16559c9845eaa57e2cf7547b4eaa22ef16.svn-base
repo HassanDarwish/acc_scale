@@ -1,0 +1,20 @@
+package truck_scale.button;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import truck_scale.interfaces.Command;
+ 
+
+public abstract class Parent_Button  extends JButton implements Command{
+
+	
+	
+	String Title;
+	public Parent_Button(ImageIcon icon,String title) {
+		// TODO Auto-generated constructor stub
+		 super(icon);
+		 Title=title;
+	}
+
+}

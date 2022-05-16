@@ -1,0 +1,32 @@
+package truck_scale.button;
+
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.InputVerifier.MyInputVerifier;
+
+public class Click_save extends Parent_Button{
+	JTextField truck_Number;
+	public Click_save(ImageIcon icon, String title,JTextField truck_Number) {
+		super(icon, title); setText(title);this.truck_Number=truck_Number;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void Execute() {
+		// TODO Auto-generated method stub
+		MyInputVerifier inputVerifier = new MyInputVerifier();
+		if (inputVerifier.verify(truck_Number)   ){
+            JOptionPane.showMessageDialog(null, "right Value");
+            
+        }else {
+        	 JOptionPane.showMessageDialog(null, "wrong Value");
+        	truck_Number.setText("");
+        }
+		
+		 
+		truck_Number.setText("");
+	}
+
+}

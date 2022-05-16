@@ -1,0 +1,31 @@
+package truck_scale.button;
+import com.users.*;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import com.enums.actions;
+import proxyAction.IProxy;
+import proxyAction.ProxyAuth;
+
+public class Click_save extends Parent_Button{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4002217925495913617L;
+	
+	JTextField truck_Number;
+	user user;
+	public Click_save(ImageIcon icon, String title,JTextField truck_Number,user user) {
+		super(icon, title); setText(title);this.truck_Number=truck_Number;this.user=user;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void Execute() {
+		// TODO Auto-generated method stub
+		IProxy action=new ProxyAuth.Builder<JTextField>().setTruck_Number(truck_Number).build(this.user,this.truck_Number,actions.SaveTruck);
+		boolean result=action.action();
+	}
+
+	 
+
+}

@@ -1,0 +1,15 @@
+package com.accTruck;
+
+import com.accTruck.ui.MainFrame;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	   MainFrame.builder.build();
+    }
+}

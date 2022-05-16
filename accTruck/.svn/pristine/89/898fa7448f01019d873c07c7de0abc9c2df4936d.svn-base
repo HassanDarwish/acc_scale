@@ -1,0 +1,41 @@
+package truck_scale.button;
+
+
+import javax.swing.JPanel;
+import com.accTruck.ui.MainFrame;
+import com.accTruck.ui.panel.Truck_Read_Balance_panel;
+import com.accTruck.ui.panel.Truck_add_panel;
+
+public class My_JMenuItem extends Parent_JMenuItem {
+
+	MainFrame frame;int panelid;JPanel T1=null;
+	public My_JMenuItem(String string,MainFrame frame,int panelid) {
+		// TODO Auto-generated constructor stub
+		super(string);
+		this.panelid=panelid;
+		this.frame=frame;
+	}
+
+	@Override
+	public void Execute() {
+		// TODO Auto-generated method stub
+	 if(frame.getCurrentPanell()!=null)
+		 	frame.getContentPane().remove(frame.getCurrentPanell());
+	 		switch (panelid) {
+	 		case 1:
+	 			  T1=Truck_add_panel.builder.build();
+	 		break;
+	 		case 2: 
+	 			  T1=Truck_Read_Balance_panel.builder.build();
+	 		break;
+	 		
+	 		}
+ 	        frame.getContentPane().add(T1);
+	        frame.invalidate();
+	        frame.validate();
+	        frame.setCurrentPanell(T1);
+        
+	 
+	}
+
+}

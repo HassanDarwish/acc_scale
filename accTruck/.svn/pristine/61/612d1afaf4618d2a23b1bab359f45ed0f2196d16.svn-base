@@ -1,0 +1,26 @@
+package com.accTruck.listeners;
+
+import java.awt.event.ActionEvent;
+
+import truck_scale.interfaces.Command;
+
+public class Button_action_listener implements java.awt.event.ActionListener {
+	 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Command obj = (Command) e.getSource();
+	    obj.Execute();
+	    
+	    /*
+	    JButton ob = (JButton) e.getSource();
+		if(ob.getName().equals("Save"));
+		JOptionPane.showMessageDialog(null,  ob.getName(),"This button name is", JOptionPane.INFORMATION_MESSAGE);
+	*/
+	    
+	}
+
+	 
+	 
+
+}

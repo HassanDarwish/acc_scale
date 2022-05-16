@@ -1,0 +1,10 @@
+package observer;
+
+import java.util.HashMap;
+
+public interface Iobservable {
+
+	public HashMap<String,Iobserver> observers=new HashMap();
+	public void attach(Iobserver obv,String id) ;
+	public void update (String sms , String id);
+}

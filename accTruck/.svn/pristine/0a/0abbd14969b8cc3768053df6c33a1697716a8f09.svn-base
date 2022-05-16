@@ -1,0 +1,83 @@
+package proxyAction;
+import java.sql.Timestamp;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.enums.actions;
+import com.users.*;
+
+import observer.Iobservable;
+import observer.Iobserver;
+import observer.Logger;
+import truck_scale.interfaces.ITextFiled;
+public   class ProxyAuth<T> implements IProxy ,Iobservable{
+
+private user user;private T truck_Number;
+private actions action;
+	private ProxyAuth(user user,T truck_Number, actions savetruck) {
+		 attach(new Logger(),"logger");
+		this.user=user;this.truck_Number=truck_Number;this.action=savetruck;
+	}
+	@Override
+	public boolean action() {
+		// TODO Auto-generated method stub
+		boolean returnResult=false;
+		
+		switch (action) {
+		
+		case SaveTruck:
+			if(user.authRole.equals("admin"))
+			{
+				IProxy action=new SaveTruckAction.Builder<T>().build(this.user,this.truck_Number);
+				update(" Saved Truck by "+user.name+" :"+new Timestamp(System.currentTimeMillis()),"logger");
+				returnResult=  action.action();
+			}else {
+				update("You do not have permission unauthorized "+user.name+" :"+new Timestamp(System.currentTimeMillis()),"logger");
+				JOptionPane.showMessageDialog(null, "You do not have permission","unauthorized ", JOptionPane.ERROR_MESSAGE);
+				returnResult=false;
+			}
+		break;
+		case ListSCars :
+	 		
+			break;
+		case Editcar :
+	 		
+			break;
+		case findcarbyid :
+	 		
+			break;
+			 
+		}
+		return returnResult;
+			
+	}
+
+	
+	public  static   class Builder<T> implements ITextFiled {
+		 public JTextField truck_Number = new JTextField();
+		 
+		public Builder<T> setTruck_Number(T truck_Number) {
+			this.truck_Number = (JTextField) truck_Number;
+			return this;
+		}
+
+		public ProxyAuth<T> build(user user, T truck_Number, actions savetruck) {
+			return new ProxyAuth<T>(user,truck_Number,savetruck);
+		}
+		
+	}
+
+
+	@Override
+	public void attach(Iobserver obv, String id) {
+		// TODO Auto-generated method stub
+		observers.put(id,obv);
+	}
+
+	@Override
+	public void update(String sms, String id) {
+		// TODO Auto-generated method stub
+		((Iobserver)observers.get(id)).update(sms);
+	}
+}

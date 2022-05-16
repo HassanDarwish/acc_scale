@@ -1,0 +1,56 @@
+package com.accTruck.ui;
+
+import javax.swing.JFrame;
+import com.accTruck.listeners.MainFrame_listener;
+import truck_scale.truck_scale;
+
+public class MainFrame extends JFrame{
+	private	 String ip_address="10.0.6.62";
+	private		String unit="";
+	private	String value="";
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6615386510602085801L;
+
+
+	private MainFrame() {
+		set_listeners();
+		Execute();
+		buid_GUI() ;
+	}
+	private void  set_listeners() {
+		addWindowListener(MainFrame_listener.builder.build());
+	}
+	private void  buid_GUI() {
+		this.setSize(800,600);
+
+		java.awt.Dimension dim = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		  this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2); 
+		
+		setVisible(true);
+	}
+	
+ 
+	public void Execute() {
+		// TODO Auto-generated method stub
+		truck_scale udpclient= new truck_scale.Builder().setHostname(ip_address).setPort(11020).setHex("3c717565726965733e3c717565727920726571753d2272656d646973702220747970653d222a222077703d2241222f3e3c2f717565726965733e").build();
+  		try {
+			udpclient.getWieght();
+			unit=udpclient.getUnit();
+			value=Float.toString(udpclient.getValue()); 
+ 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public class builder {
+		
+		public	static MainFrame build() {
+			return new MainFrame();
+		}
+		
+	}
+}
